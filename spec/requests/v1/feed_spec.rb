@@ -38,6 +38,17 @@ describe 'Feeds', :redis => true do
         last_response.body.should have_json_size(1).at_path('')
       end
 
+      it "should ignore non-hash keys" do
+        redis = Redis.new
+        redis.set 'youtube:fred', 'string_value'
+
+        get '/v1/feeds'
+        last_response.should be_ok
+        last_response.body.should have_json_path('')
+        last_response.body.should have_json_type(Array).at_path('')
+        last_response.body.should have_json_size(2).at_path('')
+      end
+
     end
 
   end

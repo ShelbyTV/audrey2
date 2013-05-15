@@ -21,10 +21,17 @@ get '/v1/feeds' do
 
   feed_keys = redis.keys(params[:type] ? "#{params[:type]}:*" : '*')
   feeds = feed_keys.map do |key|
-    feed = redis.hgetall(key)
-    feed["id"] = key
-    feed
+
+    if redis.type(key) != 'hash'
+      # ignore keys with non-hash values
+    else
+      feed = redis.hgetall(key)
+      feed["id"] = key
+      feed
+    end
+
   end
+  feeds.compact!
 
   json feeds
 end
