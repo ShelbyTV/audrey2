@@ -28,3 +28,6 @@ set :branch, "master"
 set :rails_env, "production"
 set :unicorn_env, "production"
 set :app_env,     "production"
+
+# this didn't seem to be necessary with multistage deployment - oh well
+after 'deploy:restart', 'unicorn:restart'
