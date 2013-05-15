@@ -4,9 +4,11 @@ gem 'sinatra', '1.4.2'
 gem 'sinatra-contrib', '1.4.0'
 
 gem 'multi_json'
-
 gem 'redis', '3.0.4'
-gem 'thin'
+
+# Deploy with Capistrano
+gem 'capistrano'
+gem 'rvm-capistrano'
 
 group :development,:test do
   gem 'rspec'
@@ -14,4 +16,10 @@ group :development,:test do
   gem 'rake'
   gem 'json_spec'
   gem 'rspec-redis_helper'
+  gem 'thin'
+  gem 'capistrano-unicorn', :require => false
+end
+
+group :production do
+  gem 'unicorn'
 end
