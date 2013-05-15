@@ -71,7 +71,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano
+  capistrano (~> 2.15)
   capistrano-unicorn
   json_spec
   multi_json
@@ -84,4 +84,4 @@ DEPENDENCIES
   sinatra (= 1.4.2)
   sinatra-contrib (= 1.4.0)
   thin
-  unicorn
+  unicorn (= 4.6.2)

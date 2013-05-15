@@ -7,7 +7,7 @@ gem 'multi_json'
 gem 'redis', '3.0.4'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano', '~>2.15'
 gem 'rvm-capistrano'
 
 group :development,:test do
@@ -21,5 +21,5 @@ group :development,:test do
 end
 
 group :production do
-  gem 'unicorn'
+  gem 'unicorn', '4.6.2'
 end
