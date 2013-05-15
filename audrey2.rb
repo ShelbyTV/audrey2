@@ -12,7 +12,7 @@ get '/' do
   if settings.development?
     'Welcome to audrey2'
   else
-    'Unicorn restarted'
+    not_found
   end
 end
 
