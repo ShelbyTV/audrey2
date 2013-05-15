@@ -19,9 +19,12 @@ end
 get '/v1/feeds' do
   redis = Redis.new
 
-  feed_keys = redis.keys 'youtube:*'
+  feed_keys = redis.keys(params[:type] ? "#{params[:type]}:*" : '*')
+  feeds = feed_keys.map do |key|
+    feed = redis.hgetall(key)
+    feed["id"] = key
+    feed
+  end
 
-  feed_keys.each {|key| puts key}
-
-  json :feeds => ['x', 'y']
+  json :feeds => feeds
 end

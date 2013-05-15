@@ -13,4 +13,5 @@ group :development,:test do
   gem 'rack-test'
   gem 'rake'
   gem 'json_spec'
+  gem 'rspec-redis_helper'
 end
