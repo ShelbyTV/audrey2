@@ -26,8 +26,8 @@ describe 'Feeds', :redis => true do
         last_response.body.should have_json_path('')
         last_response.body.should have_json_type(Array).at_path('')
         last_response.body.should have_json_size(2).at_path('')
-        last_response.body.should include_json({'id' => 'youtube:james', 'shelby_auth_token' => '123', 'shelby_roll_id' => '456'}.to_json).at_path('').including('id')
-        last_response.body.should include_json({'id' => 'vimeo:josh', 'shelby_auth_token' => '789', 'shelby_roll_id' => 'abc'}.to_json).at_path('').including('id')
+        last_response.body.should include_json({'id' => 'youtube:james', 'auth_token' => '123', 'roll_id' => '456'}.to_json).at_path('').including('id')
+        last_response.body.should include_json({'id' => 'vimeo:josh', 'auth_token' => '789', 'roll_id' => 'abc'}.to_json).at_path('').including('id')
       end
 
       it "should return feed info for only the feed type specified in the type param" do
@@ -73,8 +73,8 @@ describe 'Feeds', :redis => true do
 
       redis = Redis.new
       feed = redis.hgetall('youtube:james')
-      feed["auth_token"].should eq('123')
-      feed["roll_id"].should eq('456')
+      feed["shelby_auth_token"].should eq('123')
+      feed["shelby_roll_id"].should eq('456')
     end
 
     it "should return an error if trying to overwrite an existing feed" do

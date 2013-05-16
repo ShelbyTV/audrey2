@@ -26,6 +26,12 @@ get '/v1/feeds' do
       # ignore keys with non-hash values
     else
       feed = redis.hgetall(key)
+      # the public interface doesn't need "shelby_" as the prefix on the names of the keys
+      feed.keys.each do |k|
+        if k.start_with?('shelby_')
+          feed[k[7..-1]] = feed.delete(k)
+        end
+      end
       feed["id"] = key
       feed
     end
@@ -46,7 +52,7 @@ post '/v1/feeds' do
       422
     else
       # otherwise, save the feed info and return
-      redis.mapped_hmset id, {'auth_token' => params[:auth_token], 'roll_id' => params[:roll_id]}
+      redis.mapped_hmset id, {'shelby_auth_token' => params[:auth_token], 'shelby_roll_id' => params[:roll_id]}
       json({'id' => id, 'auth_token' => params[:auth_token], 'roll_id' => params[:roll_id]})
     end
   else
