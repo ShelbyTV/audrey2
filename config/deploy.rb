@@ -20,8 +20,8 @@ ssh_options[:forward_agent] = true
 require 'capistrano-unicorn'
 
 
-role :web, "108.171.174.224"
-role :app, "108.171.174.224"
+role :web, "198.101.158.13"
+role :app, "198.101.158.13"
 
 set :repository,  "git@github.com:ShelbyTV/audrey2.git"
 set :branch, "master"
