@@ -19,7 +19,6 @@ ssh_options[:forward_agent] = true
 
 require 'capistrano-unicorn'
 
-
 role :web, "198.101.158.13"
 role :app, "198.101.158.13"
 
@@ -29,5 +28,4 @@ set :rails_env, "production"
 set :unicorn_env, "production"
 set :app_env,     "production"
 
-# this didn't seem to be necessary with multistage deployment - oh well
-after 'deploy:restart', 'unicorn:restart'
+after 'deploy:restart', 'unicorn:duplicate'
